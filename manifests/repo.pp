@@ -5,14 +5,12 @@
 # @param watchdog_url sets the URL to ping after a successful backup
 # @param password sets the restic repository password
 # @param environment sets extra environment variables for backup
-# @param name sets the service name for the script
 define backup::repo (
   String $source,
   String $target,
   String $watchdog_url,
   String $password,
   Hash[String, String] $environment = {},
-  String $name = $title,
 ) {
   include backup
 
