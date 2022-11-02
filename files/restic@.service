@@ -1,0 +1,8 @@
+[Unit]
+Description=Run backup for %i
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/restic/%i
+ExecStart=/usr/bin/restic backup $RESTIC_SOURCE
+ExecStartPost=/usr/bin/curl $WATCHDOG_URL
