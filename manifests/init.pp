@@ -14,7 +14,7 @@ class backup (
 
   file { '/etc/systemd/system/restic@.timer':
     ensure  => file,
-    content => template('backup/restic@.timer'),
+    content => template('backup/restic@.timer.erb'),
   }
 
   file { '/etc/restic':
