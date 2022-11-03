@@ -1,9 +1,9 @@
-RESTIC_SOURCE=<%= @source %>
-RESTIC_REPOSITORY=<%= @target %>
-RESTIC_PASSWORD=<%= @password %>
+export RESTIC_SOURCE=<%= @source %>
+export RESTIC_REPOSITORY=<%= @target %>
+export RESTIC_PASSWORD=<%= @password %>
 
 <% @environment.each do |key, value| -%>
-<%= key %>=<%= value %>
+export <%= key %>=<%= value %>
 <% end -%>
 
-WATCHDOG_URL=<%= @watchdog_url %>
+export WATCHDOG_URL=<%= @watchdog_url %>
