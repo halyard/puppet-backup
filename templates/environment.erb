@@ -3,7 +3,7 @@ RESTIC_REPOSITORY=<%= @target %>
 RESTIC_PASSWORD=<%= @password %>
 
 <% @environment.each do |key, value| -%>
-<%= @key %>=<% @value %>
+<%= key %>=<% value %>
 <% end -%>
 
 WATCHDOG_URL=<%= @watchdog_url %>
