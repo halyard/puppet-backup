@@ -17,7 +17,7 @@ define backup::repo (
   $init_env = [
     "RESTIC_REPOSITORY=${target}",
     "RESTIC_PASSWORD=${password}",
-  ] + $environment.map |$key, $value| { "${key}/${value}" }
+  ] + $environment.map |$key, $value| { "${key}=${value}" }
 
   file { "/etc/restic/${name}":
     ensure  => file,

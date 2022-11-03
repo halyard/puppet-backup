@@ -1,6 +1,6 @@
-RESTIC_SOURCE=<% @source %>
-RESTIC_REPOSITORY=<% @target %>
-RESTIC_PASSWORD=<% @password %>
+RESTIC_SOURCE=<%= @source %>
+RESTIC_REPOSITORY=<%= @target %>
+RESTIC_PASSWORD=<%= @password %>
 
 <% @environment.each do |key, value| -%>
 <%= @key %>=<% @value %>
