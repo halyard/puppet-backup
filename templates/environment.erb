@@ -1,6 +1,7 @@
 RESTIC_SOURCE=<%= @source %>
 RESTIC_REPOSITORY=<%= @target %>
 RESTIC_PASSWORD=<%= @password %>
+RCLONE_CONFIG=/etc/restic/rclone/<%= @name %>
 
 <% @environment.each do |key, value| -%>
 <%= key %>=<%= value %>
