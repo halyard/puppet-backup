@@ -32,7 +32,8 @@ define backup::repo (
     content => template('backup/environment.erb'),
   }
 
-  -> exec { '/usr/bin/restic init':
+  -> exec { "restic-init-${name}":
+    command     => '/usr/bin/restic init',
     environment => $init_env,
     unless      => '/usr/bin/restic snapshots',
   }
