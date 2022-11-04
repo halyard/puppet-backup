@@ -5,21 +5,29 @@
 # @param watchdog_url sets the URL to ping after a successful backup
 # @param password sets the restic repository password
 # @param environment sets extra environment variables for backup
+# @param rclone_config sets the rclone backend configuration file contents
 define backup::repo (
   String $source,
   String $target,
   String $watchdog_url,
   String $password,
   Hash[String, String] $environment = {},
+  Optional[String] $rclone_config = undef,
 ) {
   include backup
 
   $init_env = [
     "RESTIC_REPOSITORY=${target}",
     "RESTIC_PASSWORD=${password}",
+    "RCLONE_CONFIG=/etc/restic/rclone/${name}",
   ] + $environment.map |$key, $value| { "${key}=${value}" }
 
   file { "/etc/restic/${name}":
+    ensure  => file,
+    content => template('backup/environment.erb'),
+  }
+
+  file { "/etc/restic/environment/${name}":
     ensure  => file,
     content => template('backup/environment.erb'),
   }
@@ -32,5 +40,12 @@ define backup::repo (
   -> service { "restic@${name}.timer":
     ensure => running,
     enable => true,
+  }
+
+  if $rclone_config != undef {
+    file { "/etc/restic/rclone/${name}":
+      ensure  => file,
+      content => $rclone_config,
+    }
   }
 }
