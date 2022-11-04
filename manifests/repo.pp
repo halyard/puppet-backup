@@ -47,6 +47,7 @@ define backup::repo (
     file { "/etc/restic/rclone/${name}":
       ensure  => file,
       content => $rclone_config,
+      before  => Exec["restic-init-${name}"],
     }
   }
 }
