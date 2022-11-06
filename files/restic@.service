@@ -2,7 +2,7 @@
 Description=Run backup for %i
 
 [Service]
-Type=oneshot
+Type=simple
 EnvironmentFile=/etc/restic/environment/%i
 ExecStart=/usr/bin/restic backup $RESTIC_SOURCE
 ExecStartPost=/usr/bin/curl $WATCHDOG_URL
