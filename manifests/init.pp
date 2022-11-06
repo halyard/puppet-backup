@@ -17,7 +17,7 @@ class backup (
     content => template('backup/restic@.timer.erb'),
   }
 
-  file { ['/etc/restic', '/etc/restic/environment/', '/etc/restic/rclone']:
+  file { ['/etc/restic', '/etc/restic/environment/', '/etc/restic/rclone', '/var/lib/restic']:
     ensure => directory,
     mode   => '0700',
   }
