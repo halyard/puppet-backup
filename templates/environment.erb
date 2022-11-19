@@ -6,7 +6,7 @@ RESTIC_PASSWORD=<%= @password %>
 RCLONE_CONFIG=/etc/restic/rclone/<%= @name %>
 
 <% unless @args.empty? -%>
-RESTIC_ARGS="<%= @args.map { |x| "'-o#{x}'" }.join(' ') %>"
+RESTIC_ARGS="<%= @args.map { |x| "'#{x}'" }.join(' ') %>"
 <% end -%>
 
 <% @environment.each do |key, value| -%>
