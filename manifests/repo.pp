@@ -6,12 +6,14 @@
 # @param password sets the restic repository password
 # @param environment sets extra environment variables for backup
 # @param rclone_config sets the rclone backend configuration file contents
+# @param args sets extra restic command line flags
 define backup::repo (
   String $source,
   String $target,
   String $watchdog_url,
   String $password,
   Hash[String, String] $environment = {},
+  Array[String] $args = [],
   Optional[String] $rclone_config = undef,
 ) {
   include backup
