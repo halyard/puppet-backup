@@ -2,6 +2,7 @@
 Description=Schedule backups for %i
 
 [Timer]
+OnBootSec=<%= @bootdelay %>
 OnUnitActiveSec=<%= @frequency %>
 
 [Install]

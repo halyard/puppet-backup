@@ -2,8 +2,10 @@
 #
 #
 # @param frequency defines how often to run restic
+# @param bootdelay defines how long to wait after boot for first run
 class backup (
   String $frequency = '86400',
+  String $bootdelay = '600',
 ) {
   package { ['restic', 'rclone']: }
 
