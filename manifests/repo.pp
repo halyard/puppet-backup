@@ -13,7 +13,7 @@ define backup::repo (
   String $watchdog_url,
   String $password,
   Hash[String, String] $environment = {},
-  Array[String] $args = ['-orclone.args=serve restic --addr 127.0.0.1:0 --stdio --use-mmap'],
+  Array[String] $args = ['--cleanup-cache -orclone.args=serve restic --addr 127.0.0.1:0 --stdio --use-mmap'],
   Optional[String] $rclone_config = undef,
 ) {
   include backup
