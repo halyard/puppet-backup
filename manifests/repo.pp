@@ -45,6 +45,11 @@ define backup::repo (
     enable => true,
   }
 
+  file { "/etc/restic/environment/${name}.source":
+    ensure  => file,
+    content => template('backup/environment.source.erb'),
+  }
+
   if $rclone_config != undef {
     file { "/etc/restic/rclone/${name}":
       ensure  => file,

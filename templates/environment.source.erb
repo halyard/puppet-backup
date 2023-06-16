@@ -1,0 +1,16 @@
+export RESTIC_CACHE_DIR=/var/lib/restic
+
+export RESTIC_SOURCE=<%= @source %>
+export RESTIC_REPOSITORY=<%= @target %>
+export RESTIC_PASSWORD=<%= @password %>
+export RCLONE_CONFIG=/etc/restic/rclone/<%= @name %>
+
+<% unless @args.empty? -%>
+export RESTIC_ARGS="<%= @args.map { |x| "'#{x}'" }.join(' ') %>"
+<% end -%>
+
+<% @environment.each do |key, value| -%>
+export <%= key %>=<%= value %>
+<% end -%>
+
+export WATCHDOG_URL=<%= @watchdog_url %>
