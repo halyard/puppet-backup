@@ -4,6 +4,9 @@
 # @param target sets the rclone destination for this backup
 # @param watchdog_url sets the URL to ping after a successful backup
 # @param password sets the restic repository password
+# @param prune controls whether old backups are automatically cleaned up
+# @param keep_dailies sets how many daily backups to keep
+# @param keep_weeklies sets how many weekly backups to keep
 # @param environment sets extra environment variables for backup
 # @param rclone_config sets the rclone backend configuration file contents
 # @param args sets extra restic command line flags
@@ -12,6 +15,9 @@ define backup::repo (
   String $target,
   String $watchdog_url,
   String $password,
+  Boolean $prune = true,
+  Integer $keep_dailies = 5,
+  Integer $keep_weeklies = 4,
   Hash[String, String] $environment = {},
   Array[String] $args = ['--cleanup-cache', '-orclone.args=serve restic --addr 127.0.0.1:0 --stdio --use-mmap'],
   Optional[String] $rclone_config = undef,
@@ -55,6 +61,18 @@ define backup::repo (
       ensure  => file,
       content => $rclone_config,
       before  => Exec["restic-init-${name}"],
+    }
+  }
+
+  if $prune {
+    service { "prune-restic@${name}.timer":
+      ensure => running,
+      enable => true,
+    }
+  } else {
+    service { "prune-restic@${name}.timer":
+      ensure => stopped,
+      enable => false,
     }
   }
 }

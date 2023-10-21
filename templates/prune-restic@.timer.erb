@@ -1,0 +1,10 @@
+[Unit]
+Description=Schedule backup pruning for %i
+
+[Timer]
+OnBootSec=<%= @prunebootdelay %>
+OnUnitActiveSec=<%= @prunefrequency %>
+
+[Install]
+WantedBy=multi-user.target
+

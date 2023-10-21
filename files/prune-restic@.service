@@ -1,0 +1,7 @@
+[Unit]
+Description=Run backup prune for %i
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/restic/environment/%i
+ExecStart=/usr/bin/restic forget --prune --keep-daily $RESTIC_KEEP_DAILIES --keep-weekly $RESTIC_KEEP_WEEKLIES
