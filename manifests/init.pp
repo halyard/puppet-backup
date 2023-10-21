@@ -6,6 +6,8 @@
 class backup (
   String $frequency = '86400',
   String $bootdelay = '600',
+  String $frequency = '172800',
+  String $bootdelay = '3600',
 ) {
   package { ['restic', 'rclone']: }
 
@@ -17,6 +19,16 @@ class backup (
   file { '/etc/systemd/system/restic@.timer':
     ensure  => file,
     content => template('backup/restic@.timer.erb'),
+  }
+
+  file { '/etc/systemd/system/prune-restic@.service':
+    ensure => file,
+    source => 'puppet:///modules/backup/prune-restic@.service',
+  }
+
+  file { '/etc/systemd/system/prune-restic@.timer':
+    ensure  => file,
+    content => template('backup/prune-restic@.timer.erb'),
   }
 
   file { ['/etc/restic', '/etc/restic/environment/', '/etc/restic/rclone', '/var/lib/restic']:
