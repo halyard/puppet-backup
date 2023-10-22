@@ -3,7 +3,7 @@ Description=Schedule backups for %i
 
 [Timer]
 OnBootSec=<%= @bootdelay %>
-OnUnitActiveSec=<%= @frequency %>
+OnUnitInactiveSec=<%= @frequency %>
 
 [Install]
 WantedBy=multi-user.target
