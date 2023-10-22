@@ -5,10 +5,8 @@ RESTIC_REPOSITORY=<%= @target %>
 RESTIC_PASSWORD=<%= @password %>
 RCLONE_CONFIG=/etc/restic/rclone/<%= @name %>
 
-<% if @prune -%>
 RESTIC_KEEP_DAILIES=<%= @keep_dailies %>
 RESTIC_KEEP_WEEKLIES=<%= @keep_weeklies %>
-<% end -%>
 
 <% unless @args.empty? -%>
 RESTIC_ARGS="<%= @args.map { |x| "'#{x}'" }.join(' ') %>"
