@@ -2,7 +2,7 @@
 Description=Run backup for %i
 
 [Service]
-Type=simple
+Type=oneshot
 EnvironmentFile=/etc/restic/environment/%i
 ExecStart=/usr/bin/restic backup $RESTIC_ARGS $RESTIC_SOURCE
 ExecStartPost=/usr/bin/restic forget --prune --keep-daily $RESTIC_KEEP_DAILIES --keep-weekly $RESTIC_KEEP_WEEKLIES
