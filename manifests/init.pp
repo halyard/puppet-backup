@@ -19,14 +19,6 @@ class backup (
     content => template('backup/restic@.timer.erb'),
   }
 
-  file { '/etc/systemd/system/prune-restic@.service':
-    ensure => absent,
-  }
-
-  file { '/etc/systemd/system/prune-restic@.timer':
-    ensure  => absent,
-  }
-
   file { ['/etc/restic', '/etc/restic/environment/', '/etc/restic/rclone', '/var/lib/restic']:
     ensure => directory,
     mode   => '0700',
