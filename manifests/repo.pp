@@ -4,7 +4,6 @@
 # @param target sets the rclone destination for this backup
 # @param watchdog_url sets the URL to ping after a successful backup
 # @param password sets the restic repository password
-# @param prune controls whether old backups are automatically cleaned up
 # @param keep_dailies sets how many daily backups to keep
 # @param keep_weeklies sets how many weekly backups to keep
 # @param environment sets extra environment variables for backup
@@ -15,7 +14,6 @@ define backup::repo (
   String $target,
   String $watchdog_url,
   String $password,
-  Boolean $prune = true,
   Integer $keep_dailies = 5,
   Integer $keep_weeklies = 4,
   Hash[String, String] $environment = {},
@@ -64,15 +62,8 @@ define backup::repo (
     }
   }
 
-  if $prune {
-    service { "prune-restic@${name}.timer":
-      ensure => running,
-      enable => true,
-    }
-  } else {
-    service { "prune-restic@${name}.timer":
-      ensure => stopped,
-      enable => false,
-    }
+  service { "prune-restic@${name}.timer":
+    ensure => stopped,
+    enable => false,
   }
 }

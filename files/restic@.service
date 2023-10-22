@@ -5,4 +5,5 @@ Description=Run backup for %i
 Type=simple
 EnvironmentFile=/etc/restic/environment/%i
 ExecStart=/usr/bin/restic backup $RESTIC_ARGS $RESTIC_SOURCE
+ExecStartPost=/usr/bin/restic forget --prune --keep-daily $RESTIC_KEEP_DAILIES --keep-weekly $RESTIC_KEEP_WEEKLIES
 ExecStartPost=/usr/bin/curl $WATCHDOG_URL
