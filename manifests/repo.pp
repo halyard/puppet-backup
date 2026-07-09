@@ -26,6 +26,7 @@ define backup::repo (
     "RESTIC_REPOSITORY=${target}",
     "RESTIC_PASSWORD=${password}",
     "RCLONE_CONFIG=/etc/restic/rclone/${name}",
+    'RESTIC_CACHE_DIR=/var/lib/restic',
   ] + $environment.map |$key, $value| { "${key}=${value}" }
 
   file { "/etc/restic/${name}":
